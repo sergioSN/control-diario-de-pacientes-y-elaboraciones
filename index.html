@@ -56,8 +56,12 @@
       </div>
       <div class="p-4">
         <div class="bg-white border border-slate-200 rounded-lg p-4">
-          <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Previsión total del día</label>
-          <input type="number" id="previsionGlobal" value="54" onchange="saveToLocalStorage()" class="w-full text-center font-bold text-2xl text-violet-800 bg-violet-50 border border-violet-300 rounded-md py-2 focus:ring-2 focus:ring-violet-500 focus:bg-white outline-none">
+          <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Escribe la suma (ej: 5+20+2+16+5+6)</label>
+          <input type="text" id="previsionGlobal" value="5+20+2+16+5+6" oninput="updatePrevision()" onchange="updatePrevision()" class="w-full text-center font-bold text-xl text-violet-800 bg-violet-50 border border-violet-300 rounded-md py-2 focus:ring-2 focus:ring-violet-500 focus:bg-white outline-none placeholder:text-slate-400">
+          <div class="mt-3 flex items-center justify-center gap-3">
+            <span class="text-xs font-semibold text-slate-500 uppercase">Total:</span>
+            <span id="previsionTotal" class="text-3xl font-black text-violet-700">0</span>
+          </div>
         </div>
       </div>
     </div>
@@ -70,29 +74,41 @@
         </span>
       </div>
       <div class="p-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
-          <span class="font-semibold text-sm text-slate-700">Insulina</span>
-          <div class="flex items-center gap-2">
-            <button onclick="changeVal('colInsulina', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
-            <input type="number" id="colInsulina" value="10" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
-            <button onclick="changeVal('colInsulina', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+        <!-- Insulina -->
+        <div class="bg-white border border-slate-200 rounded-lg p-3">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-semibold text-sm text-slate-700">Insulina</span>
+            <div class="flex items-center gap-2">
+              <button onclick="changeVal('colInsulina', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+              <input type="number" id="colInsulina" value="10" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+              <button onclick="changeVal('colInsulina', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+            </div>
           </div>
+          <input type="text" id="colInsulinaNota" value="" placeholder="Fecha / Nota (ej: 30/08/26)" onchange="saveToLocalStorage()" class="w-full text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded px-2 py-1.5 focus:ring-1 focus:ring-blue-400 focus:bg-white outline-none placeholder:text-slate-400">
         </div>
-        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
-          <span class="font-semibold text-sm text-slate-700">Ceftazidima (Cefta)</span>
-          <div class="flex items-center gap-2">
-            <button onclick="changeVal('colCefta', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
-            <input type="number" id="colCefta" value="4" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
-            <button onclick="changeVal('colCefta', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+        <!-- Ceftazidima -->
+        <div class="bg-white border border-slate-200 rounded-lg p-3">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-semibold text-sm text-slate-700">Ceftazidima (Cefta)</span>
+            <div class="flex items-center gap-2">
+              <button onclick="changeVal('colCefta', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+              <input type="number" id="colCefta" value="4" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+              <button onclick="changeVal('colCefta', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+            </div>
           </div>
+          <input type="text" id="colCeftaNota" value="" placeholder="Fecha / Nota (ej: 30/01/27)" onchange="saveToLocalStorage()" class="w-full text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded px-2 py-1.5 focus:ring-1 focus:ring-blue-400 focus:bg-white outline-none placeholder:text-slate-400">
         </div>
-        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
-          <span class="font-semibold text-sm text-slate-700">Tobramicina (Tobra)</span>
-          <div class="flex items-center gap-2">
-            <button onclick="changeVal('colTobra', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
-            <input type="number" id="colTobra" value="2" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
-            <button onclick="changeVal('colTobra', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+        <!-- Tobramicina -->
+        <div class="bg-white border border-slate-200 rounded-lg p-3">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-semibold text-sm text-slate-700">Tobramicina (Tobra)</span>
+            <div class="flex items-center gap-2">
+              <button onclick="changeVal('colTobra', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+              <input type="number" id="colTobra" value="2" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+              <button onclick="changeVal('colTobra', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+            </div>
           </div>
+          <input type="text" id="colTobraNota" value="" placeholder="Fecha / Nota (ej: 27/08/26)" onchange="saveToLocalStorage()" class="w-full text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded px-2 py-1.5 focus:ring-1 focus:ring-blue-400 focus:bg-white outline-none placeholder:text-slate-400">
         </div>
       </div>
       <div class="bg-blue-50 border-t border-blue-200 px-4 py-2.5 flex items-center justify-between">
@@ -290,16 +306,50 @@
         </button>
       </div>
 
-      <div class="bg-white p-4 rounded-lg border border-slate-200 text-slate-600 text-xs space-y-1.5">
-        <div class="font-bold text-slate-800 text-sm mb-1 flex items-center gap-2">
+      <div class="bg-white p-4 rounded-lg border border-slate-200 text-slate-600 text-xs space-y-2">
+        <div class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
           <i class="fa-solid fa-circle-info text-blue-500"></i> GUÍA RÁPIDA DE USO:
         </div>
-        <p>• Seleccionar la fecha del turno con el <b>selector de fecha</b> del encabezado.</p>
-        <p>• Pulsar en <b>+</b> o <b>-</b> para incrementar o decrementar el recuento de cada área.</p>
-        <p>• También se puede escribir el número exacto directamente en la casilla de la columna <b>VALOR</b>.</p>
-        <p>• Pulsar en <b>Copiar Resumen</b> para copiar un texto formateado al portapapeles.</p>
-        <p>• Pulsar en <b>Exportar Excel</b> para descargar un archivo <b>.xlsx</b> con todos los datos del turno.</p>
-        <p>• Al finalizar el turno, pulsar en <b>Reiniciar Turno</b> para poner a cero todas las métricas.</p>
+
+        <div class="flex items-start gap-2">
+          <span class="font-bold text-slate-800 whitespace-nowrap">1. Fecha:</span>
+          <p>Seleccionar la fecha del turno con el selector de fecha del encabezado.</p>
+        </div>
+
+        <div class="flex items-start gap-2">
+          <span class="font-bold text-slate-800 whitespace-nowrap">2. Previsión:</span>
+          <p>Escribe la suma tal cual la apuntas en el papel, por ejemplo: <b>5+20+2+16+5+6</b>. El <b>Total</b> se calcula automáticamente debajo.</p>
+        </div>
+
+        <div class="flex items-start gap-2">
+          <span class="font-bold text-slate-800 whitespace-nowrap">3. Colirios:</span>
+          <p>Pulsa en <b>+</b> o <b>-</b> para ajustar las unidades de cada colirio. Puedes escribir también una <b>fecha de caducidad o nota</b> en la casilla inferior (por ejemplo: <b>30/08/26</b>).</p>
+        </div>
+
+        <div class="flex items-start gap-2">
+          <span class="font-bold text-slate-800 whitespace-nowrap">4. Servicios:</span>
+          <p>Pulsa <b>+</b> o <b>-</b> en cada fila (Sala, HDM, Otros, HDO) para contar pacientes y elaboraciones. También puedes escribir el número directamente.</p>
+        </div>
+
+        <div class="flex items-start gap-2">
+          <span class="font-bold text-slate-800 whitespace-nowrap">5. Totales:</span>
+          <p>Los totales de <b>Pacientes</b>, <b>Elaboraciones</b> y <b>Colirios</b> se suman automáticamente.</p>
+        </div>
+
+        <div class="flex items-start gap-2">
+          <span class="font-bold text-slate-800 whitespace-nowrap">6. Copiar:</span>
+          <p>Pulsa <b>Copiar Resumen</b> para copiar un texto con todos los datos. Luego puedes pegarlo en WhatsApp, un correo o donde necesites.</p>
+        </div>
+
+        <div class="flex items-start gap-2">
+          <span class="font-bold text-slate-800 whitespace-nowrap">7. Excel:</span>
+          <p>Pulsa <b>Exportar Excel</b> para descargar un archivo con todos los datos del turno.</p>
+        </div>
+
+        <div class="flex items-start gap-2">
+          <span class="font-bold text-slate-800 whitespace-nowrap">8. Nuevo turno:</span>
+          <p>Al finalizar, pulsa <b>Reiniciar Turno</b> para empezar de cero con el siguiente turno.</p>
+        </div>
       </div>
 
       <div class="bg-amber-50 p-4 rounded-lg border border-amber-200 text-amber-800 text-xs space-y-1.5 mt-4">
@@ -321,16 +371,31 @@
     const idsP = ['salaP', 'hdmP', 'otrosP', 'hdoP'];
     const idsE = ['salaE', 'hdmE', 'otrosE', 'hdoE'];
     const idsCol = ['colInsulina', 'colCefta', 'colTobra'];
-    const allIds = [...idsP, ...idsE, ...idsCol, 'previsionGlobal'];
+    const idsColNota = ['colInsulinaNota', 'colCeftaNota', 'colTobraNota'];
+    const allIds = [...idsP, ...idsE, ...idsCol];
+    const allIdsConNota = [...allIds, ...idsColNota];
 
     function formatDate(iso) {
       const [y, m, d] = iso.split('-');
       return `${d}/${m}/${y}`;
     }
 
+    function parseFormula(str) {
+      if (!str || !str.trim()) return 0;
+      const cleaned = str.replace(/[^0-9+\-*/().]/g, '');
+      if (!cleaned) return 0;
+      try {
+        const result = Function('"use strict"; return (' + cleaned + ')')();
+        return (isFinite(result) && result >= 0) ? Math.round(result) : 0;
+      } catch (e) {
+        return 0;
+      }
+    }
+
     function saveToLocalStorage() {
       const data = {};
-      allIds.forEach(id => { data[id] = document.getElementById(id).value; });
+      allIdsConNota.forEach(id => { data[id] = document.getElementById(id).value; });
+      data.previsionGlobal = document.getElementById('previsionGlobal').value;
       data.fechaTurno = document.getElementById('fechaTurno').value;
       localStorage.setItem('controlDiario', JSON.stringify(data));
     }
@@ -340,9 +405,10 @@
       if (!raw) return;
       try {
         const data = JSON.parse(raw);
-        allIds.forEach(id => {
+        allIdsConNota.forEach(id => {
           if (data[id] !== undefined) document.getElementById(id).value = data[id];
         });
+        if (data.previsionGlobal !== undefined) document.getElementById('previsionGlobal').value = data.previsionGlobal;
         if (data.fechaTurno) document.getElementById('fechaTurno').value = data.fechaTurno;
       } catch (e) {}
     }
@@ -371,23 +437,40 @@
       saveToLocalStorage();
     }
 
+    function updatePrevision() {
+      const raw = document.getElementById('previsionGlobal').value;
+      const total = parseFormula(raw);
+      document.getElementById('previsionTotal').innerText = total;
+      saveToLocalStorage();
+    }
+
     function resetAll() {
       if (confirm('¿Estás seguro de que deseas reiniciar todos los contadores a 0 para el nuevo turno?')) {
-        allIds.forEach(id => { document.getElementById(id).value = 0; });
+        allIdsConNota.forEach(id => { document.getElementById(id).value = ''; });
+        document.getElementById('previsionGlobal').value = '5+20+2+16+5+6';
         localStorage.removeItem('controlDiario');
         updateTotals();
         updateColirios();
+        updatePrevision();
       }
     }
 
     function copyData() {
       const fecha = formatDate(document.getElementById('fechaTurno').value);
       const totalCol = idsCol.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
+      const prevText = document.getElementById('previsionGlobal').value;
+      const prevTotal = parseFormula(prevText);
+
+      const colNotes = idsCol.map(id => {
+        const nota = document.getElementById(id + 'Nota').value;
+        return nota ? ` (${nota})` : '';
+      });
+
       const text = `CONTROL DIARIO DE PACIENTES Y ELABORACIONES (${fecha})
 --------------------------------------------------
-PREVISIÓN GLOBAL: ${document.getElementById('previsionGlobal').value}
+PREVISIÓN GLOBAL: ${prevText} (Total: ${prevTotal})
 --------------------------------------------------
-COLIRIOS: Insulina=${document.getElementById('colInsulina').value} | Cefta=${document.getElementById('colCefta').value} | Tobra=${document.getElementById('colTobra').value}
+COLIRIOS: Insulina=${document.getElementById('colInsulina').value}${colNotes[0]} | Cefta=${document.getElementById('colCefta').value}${colNotes[1]} | Tobra=${document.getElementById('colTobra').value}${colNotes[2]}
 TOTAL COLIRIOS: ${totalCol}
 --------------------------------------------------
 SALA:    Pacientes=${document.getElementById('salaP').value} | Elaboraciones=${document.getElementById('salaE').value}
@@ -408,18 +491,25 @@ TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`
       const fechaLegible = formatDate(fecha);
       const wb = XLSX.utils.book_new();
 
+      const prevText = document.getElementById('previsionGlobal').value;
+      const prevTotal = parseFormula(prevText);
+      const colInsNota = document.getElementById('colInsulinaNota').value;
+      const colCeftaNota = document.getElementById('colCeftaNota').value;
+      const colTobraNota = document.getElementById('colTobraNota').value;
+
       const rows = [
         ['CONTROL DIARIO DE PACIENTES Y ELABORACIONES'],
         ['Fecha', fechaLegible],
         [],
         ['--- PREVISIÓN ---', '', ''],
-        ['Previsión Global', parseInt(document.getElementById('previsionGlobal').value) || 0],
+        ['Previsión (desglose)', prevText],
+        ['Previsión (total)', prevTotal],
         [],
         ['--- COLIRIOS ESPECIALES ---', '', ''],
-        ['Colirio', 'Unidades'],
-        ['Insulina', parseInt(document.getElementById('colInsulina').value) || 0],
-        ['Ceftazidima (Cefta)', parseInt(document.getElementById('colCefta').value) || 0],
-        ['Tobramicina (Tobra)', parseInt(document.getElementById('colTobra').value) || 0],
+        ['Colirio', 'Unidades', 'Fecha / Nota'],
+        ['Insulina', parseInt(document.getElementById('colInsulina').value) || 0, colInsNota],
+        ['Ceftazidima (Cefta)', parseInt(document.getElementById('colCefta').value) || 0, colCeftaNota],
+        ['Tobramicina (Tobra)', parseInt(document.getElementById('colTobra').value) || 0, colTobraNota],
         ['TOTAL COLIRIOS', idsCol.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0)],
         [],
         ['--- SERVICIOS ---', '', ''],
@@ -438,12 +528,12 @@ TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`
       ];
 
       const ws = XLSX.utils.aoa_to_sheet(rows);
-      ws['!cols'] = [{ wch: 25 }, { wch: 22 }, { wch: 10 }];
+      ws['!cols'] = [{ wch: 25 }, { wch: 22 }, { wch: 15 }];
       XLSX.utils.book_append_sheet(wb, ws, 'Control Diario');
       XLSX.writeFile(wb, `control_diario_${fecha}.xlsx`);
     }
 
-    allIds.forEach(id => {
+    idsColNota.forEach(id => {
       document.getElementById(id).addEventListener('change', saveToLocalStorage);
     });
     document.getElementById('fechaTurno').addEventListener('change', saveToLocalStorage);
@@ -451,6 +541,7 @@ TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`
     loadFromLocalStorage();
     updateTotals();
     updateColirios();
+    updatePrevision();
   </script>
 </body>
 </html>
