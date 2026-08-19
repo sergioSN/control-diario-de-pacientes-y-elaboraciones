@@ -47,6 +47,60 @@
       </div>
     </div>
 
+    <!-- PREVISIÓN GLOBAL -->
+    <div class="border-b border-slate-200">
+      <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2">
+          <i class="fa-solid fa-chart-line text-violet-400"></i> Previsión Global
+        </span>
+      </div>
+      <div class="p-4">
+        <div class="bg-white border border-slate-200 rounded-lg p-4">
+          <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Previsión total del día</label>
+          <input type="number" id="previsionGlobal" value="54" onchange="saveToLocalStorage()" class="w-full text-center font-bold text-2xl text-violet-800 bg-violet-50 border border-violet-300 rounded-md py-2 focus:ring-2 focus:ring-violet-500 focus:bg-white outline-none">
+        </div>
+      </div>
+    </div>
+
+    <!-- COLIRIOS ESPECIALES -->
+    <div class="border-b border-slate-200">
+      <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2">
+          <i class="fa-solid fa-droplet text-blue-400"></i> Colirios Especiales
+        </span>
+      </div>
+      <div class="p-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
+          <span class="font-semibold text-sm text-slate-700">Insulina</span>
+          <div class="flex items-center gap-2">
+            <button onclick="changeVal('colInsulina', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+            <input type="number" id="colInsulina" value="10" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            <button onclick="changeVal('colInsulina', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+          </div>
+        </div>
+        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
+          <span class="font-semibold text-sm text-slate-700">Ceftazidima (Cefta)</span>
+          <div class="flex items-center gap-2">
+            <button onclick="changeVal('colCefta', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+            <input type="number" id="colCefta" value="4" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            <button onclick="changeVal('colCefta', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+          </div>
+        </div>
+        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
+          <span class="font-semibold text-sm text-slate-700">Tobramicina (Tobra)</span>
+          <div class="flex items-center gap-2">
+            <button onclick="changeVal('colTobra', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+            <input type="number" id="colTobra" value="2" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            <button onclick="changeVal('colTobra', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-blue-50 border-t border-blue-200 px-4 py-2.5 flex items-center justify-between">
+        <span class="text-xs font-bold text-blue-700 uppercase">Total Colirios</span>
+        <span id="totalColirios" class="text-xl font-black text-blue-800">16</span>
+      </div>
+    </div>
+
     <!-- MAIN TABLE: SERVICIOS -->
     <div class="overflow-x-auto">
       <table class="w-full text-left border-collapse">
@@ -218,64 +272,6 @@
       </table>
     </div>
 
-    <!-- COLIRIOS ESPECIALES -->
-    <div class="border-t border-slate-200">
-      <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2">
-          <i class="fa-solid fa-droplet text-blue-400"></i> Colirios Especiales
-        </span>
-      </div>
-      <div class="p-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
-
-        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
-          <span class="font-semibold text-sm text-slate-700">Insulina</span>
-          <div class="flex items-center gap-2">
-            <button onclick="changeVal('colInsulina', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
-            <input type="number" id="colInsulina" value="10" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
-            <button onclick="changeVal('colInsulina', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
-          <span class="font-semibold text-sm text-slate-700">Ceftazidima (Cefta)</span>
-          <div class="flex items-center gap-2">
-            <button onclick="changeVal('colCefta', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
-            <input type="number" id="colCefta" value="4" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
-            <button onclick="changeVal('colCefta', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
-          <span class="font-semibold text-sm text-slate-700">Tobramicina (Tobra)</span>
-          <div class="flex items-center gap-2">
-            <button onclick="changeVal('colTobra', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
-            <input type="number" id="colTobra" value="2" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
-            <button onclick="changeVal('colTobra', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
-          </div>
-        </div>
-
-      </div>
-      <div class="bg-blue-50 border-t border-blue-200 px-4 py-2.5 flex items-center justify-between">
-        <span class="text-xs font-bold text-blue-700 uppercase">Total Colirios</span>
-        <span id="totalColirios" class="text-xl font-black text-blue-800">16</span>
-      </div>
-    </div>
-
-    <!-- PREVISIÓN GLOBAL -->
-    <div class="border-t border-slate-200">
-      <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2">
-          <i class="fa-solid fa-chart-line text-violet-400"></i> Previsión Global
-        </span>
-      </div>
-      <div class="p-4">
-        <div class="bg-white border border-slate-200 rounded-lg p-4">
-          <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Previsión total del día</label>
-          <input type="number" id="previsionGlobal" value="54" onchange="saveToLocalStorage()" class="w-full text-center font-bold text-2xl text-violet-800 bg-violet-50 border border-violet-300 rounded-md py-2 focus:ring-2 focus:ring-violet-500 focus:bg-white outline-none">
-        </div>
-      </div>
-    </div>
-
     <!-- FOOTER ACTIONS & GUIDE -->
     <div class="bg-slate-50 p-6 border-t border-slate-200">
 
@@ -389,17 +385,18 @@
       const totalCol = idsCol.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
       const text = `CONTROL DIARIO DE PACIENTES Y ELABORACIONES (${fecha})
 --------------------------------------------------
+PREVISIÓN GLOBAL: ${document.getElementById('previsionGlobal').value}
+--------------------------------------------------
+COLIRIOS: Insulina=${document.getElementById('colInsulina').value} | Cefta=${document.getElementById('colCefta').value} | Tobra=${document.getElementById('colTobra').value}
+TOTAL COLIRIOS: ${totalCol}
+--------------------------------------------------
 SALA:    Pacientes=${document.getElementById('salaP').value} | Elaboraciones=${document.getElementById('salaE').value}
 HDM:     Pacientes=${document.getElementById('hdmP').value} | Elaboraciones=${document.getElementById('hdmE').value}
 OTROS:   Pacientes=${document.getElementById('otrosP').value} | Elaboraciones=${document.getElementById('otrosE').value}
 HDO:     Pacientes=${document.getElementById('hdoP').value} | Elaboraciones=${document.getElementById('hdoE').value}
 --------------------------------------------------
 TOTAL PACIENTES: ${document.getElementById('totalPacientes').innerText}
-TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}
---------------------------------------------------
-COLIRIOS: Insulina=${document.getElementById('colInsulina').value} | Cefta=${document.getElementById('colCefta').value} | Tobra=${document.getElementById('colTobra').value}
-TOTAL COLIRIOS: ${totalCol}
-PREVISIÓN GLOBAL: ${document.getElementById('previsionGlobal').value}`;
+TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`;
 
       navigator.clipboard.writeText(text).then(() => {
         alert('¡Resumen del turno copiado al portapapeles!');
@@ -415,6 +412,16 @@ PREVISIÓN GLOBAL: ${document.getElementById('previsionGlobal').value}`;
         ['CONTROL DIARIO DE PACIENTES Y ELABORACIONES'],
         ['Fecha', fechaLegible],
         [],
+        ['--- PREVISIÓN ---', '', ''],
+        ['Previsión Global', parseInt(document.getElementById('previsionGlobal').value) || 0],
+        [],
+        ['--- COLIRIOS ESPECIALES ---', '', ''],
+        ['Colirio', 'Unidades'],
+        ['Insulina', parseInt(document.getElementById('colInsulina').value) || 0],
+        ['Ceftazidima (Cefta)', parseInt(document.getElementById('colCefta').value) || 0],
+        ['Tobramicina (Tobra)', parseInt(document.getElementById('colTobra').value) || 0],
+        ['TOTAL COLIRIOS', idsCol.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0)],
+        [],
         ['--- SERVICIOS ---', '', ''],
         ['Servicio', 'Métrica', 'Valor'],
         ['Sala', 'Pacientes (P)', parseInt(document.getElementById('salaP').value) || 0],
@@ -427,17 +434,7 @@ PREVISIÓN GLOBAL: ${document.getElementById('previsionGlobal').value}`;
         ['H.D.O.', 'Elaboraciones (E)', parseInt(document.getElementById('hdoE').value) || 0],
         [],
         ['TOTAL PACIENTES', parseInt(document.getElementById('totalPacientes').innerText) || 0],
-        ['TOTAL ELABORACIONES', parseInt(document.getElementById('totalElaboraciones').innerText) || 0],
-        [],
-        ['--- COLIRIOS ESPECIALES ---', '', ''],
-        ['Colirio', 'Unidades'],
-        ['Insulina', parseInt(document.getElementById('colInsulina').value) || 0],
-        ['Ceftazidima (Cefta)', parseInt(document.getElementById('colCefta').value) || 0],
-        ['Tobramicina (Tobra)', parseInt(document.getElementById('colTobra').value) || 0],
-        ['TOTAL COLIRIOS', idsCol.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0)],
-        [],
-        ['--- PREVISIÓN ---', '', ''],
-        ['Previsión Global', parseInt(document.getElementById('previsionGlobal').value) || 0]
+        ['TOTAL ELABORACIONES', parseInt(document.getElementById('totalElaboraciones').innerText) || 0]
       ];
 
       const ws = XLSX.utils.aoa_to_sheet(rows);
