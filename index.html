@@ -272,11 +272,15 @@
       <div class="flex flex-col sm:flex-row gap-4 mb-6">
         <button onclick="copyData()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-lg shadow transition flex items-center justify-center gap-2">
           <i class="fa-regular fa-copy"></i>
-          <span>Copiar Resumen para Reporte</span>
+          <span>Copiar Resumen</span>
+        </button>
+        <button onclick="exportToExcel()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-lg shadow transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-file-excel"></i>
+          <span>Exportar Excel</span>
         </button>
         <button onclick="resetAll()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-6 rounded-lg shadow transition flex items-center justify-center gap-2">
           <i class="fa-solid fa-rotate-left"></i>
-          <span>Reiniciar Turno (Poner a 0)</span>
+          <span>Reiniciar Turno</span>
         </button>
       </div>
 
