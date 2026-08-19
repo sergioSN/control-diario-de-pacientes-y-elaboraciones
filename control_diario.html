@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONTROL DIARIO DE PACIENTES Y ELABORACIONES</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen p-4 md:p-8 text-slate-800">
+
+  <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200">
+    
+    <!-- HEADER -->
+    <div class="bg-slate-900 text-white p-6 border-b border-slate-800">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">CONTROL DIARIO DE PACIENTES Y ELABORACIONES</h1>
+          <p class="text-slate-400 text-sm mt-1">Aplicación de gestión y recuento diario para servicios hospitalarios</p>
+        </div>
+        <div class="flex items-center gap-3 bg-slate-800/80 px-4 py-2.5 rounded-lg border border-slate-700">
+          <i class="fa-regular fa-calendar-days text-blue-400 text-lg"></i>
+          <div>
+            <span class="text-xs font-semibold text-slate-400 block uppercase tracking-wider">Fecha / Turno</span>
+            <input type="date" id="fechaTurno" value="2026-08-19" class="bg-transparent font-bold text-white text-sm focus:outline-none w-36 border-b border-slate-600 focus:border-blue-400 transition">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN TABLE CONTAINER -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-800 text-slate-200 text-xs font-bold uppercase tracking-wider border-b border-slate-700">
+            <th class="py-3.5 px-4 w-1/5">Servicio / Área</th>
+            <th class="py-3.5 px-4 w-1/6">Métrica</th>
+            <th class="py-3.5 px-4 text-center w-28">RESTAR</th>
+            <th class="py-3.5 px-4 text-center w-32">VALOR ACTUAL</th>
+            <th class="py-3.5 px-4 text-center w-28">SUMAR</th>
+            <th class="py-3.5 px-4">Notas / Desglose</th>
+            <th class="py-3.5 px-4 text-right w-28">Previsión</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 text-sm">
+
+          <!-- SALA -->
+          <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
+            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">SALA</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">Sala</td>
+            <td class="py-3 px-4 font-semibold text-slate-900">Pacientes (P)</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('salaP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                -
+              </button>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="number" id="salaP" value="3" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('salaP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                +
+              </button>
+            </td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Recuento directo en sala</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-400">-</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">Sala</td>
+            <td class="py-3 px-4 font-semibold text-slate-900">Elaboraciones (E)</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('salaE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                -
+              </button>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="number" id="salaE" value="7" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('salaE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                +
+              </button>
+            </td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Recuento directo en sala</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-400">-</td>
+          </tr>
+
+          <!-- HDM -->
+          <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
+            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">HOSPITAL DE DÍA MÉDICO (HDM)</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">H.D.M.</td>
+            <td class="py-3 px-4 font-semibold text-slate-900">Pacientes (P)</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('hdmP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                -
+              </button>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="number" id="hdmP" value="1" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('hdmP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                +
+              </button>
+            </td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Contador individual</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-400">-</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">H.D.M.</td>
+            <td class="py-3 px-4 font-semibold text-slate-900">Elaboraciones (E)</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('hdmE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                -
+              </button>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="number" id="hdmE" value="1" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('hdmE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                +
+              </button>
+            </td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Contador individual</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-400">-</td>
+          </tr>
+
+          <!-- OTROS -->
+          <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
+            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">OTROS</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">Otros</td>
+            <td class="py-3 px-4 font-semibold text-slate-900">Pacientes (P)</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('otrosP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                -
+              </button>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="number" id="otrosP" value="4" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('otrosP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                +
+              </button>
+            </td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Recuento externo / otros servicios</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-400">-</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">Otros</td>
+            <td class="py-3 px-4 font-semibold text-slate-900">Elaboraciones (E)</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('otrosE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                -
+              </button>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="number" id="otrosE" value="4" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('otrosE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                +
+              </button>
+            </td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Recuento externo / otros servicios</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-400">-</td>
+          </tr>
+
+          <!-- HDO -->
+          <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
+            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">HOSPITAL DE DÍA ONCOLÓGICO (HDO)</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">H.D.O.</td>
+            <td class="py-3 px-4 font-semibold text-slate-900">Pacientes (P)</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('hdoP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                -
+              </button>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="number" id="hdoP" value="94" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('hdoP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                +
+              </button>
+            </td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Marcas en hoja de registro</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-400">-</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">H.D.O.</td>
+            <td class="py-3 px-4 font-semibold text-slate-900">Elaboraciones (E)</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('hdoE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                -
+              </button>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="number" id="hdoE" value="147" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            </td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="changeVal('hdoE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
+                +
+              </button>
+            </td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Marcas en hoja de registro</td>
+            <td class="py-3 px-4 text-right font-medium text-slate-400">-</td>
+          </tr>
+
+          <!-- PREVISIÓN Y COLIRIOS -->
+          <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
+            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">PREVISIÓN Y COLIRIOS</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">Colirios Especiales</td>
+            <td class="py-3 px-4 text-xs text-slate-600">Insulina (10), Cefta (4), Tobra (2)</td>
+            <td colspan="3"></td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Desglose activo</td>
+            <td class="py-3 px-4 text-right font-bold text-slate-800">16</td>
+          </tr>
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-4 font-medium text-slate-700">Previsión Global</td>
+            <td class="py-3 px-4 text-xs text-slate-600">Suma total estimada</td>
+            <td colspan="3"></td>
+            <td class="py-3 px-4 text-slate-500 text-xs">Fórmula: 5+20+2+16+5+6</td>
+            <td class="py-3 px-4 text-right font-bold text-slate-800">54</td>
+          </tr>
+
+          <!-- TOTALES GENERALES -->
+          <tr class="bg-emerald-50/80 border-t-2 border-emerald-500 font-bold">
+            <td class="py-4 px-4 text-emerald-950 font-extrabold uppercase text-xs" colspan="2">TOTAL GENERAL PACIENTES</td>
+            <td colspan="1"></td>
+            <td class="py-4 px-4 text-center">
+              <span id="totalPacientes" class="text-2xl text-emerald-700 font-black">102</span>
+            </td>
+            <td colspan="1"></td>
+            <td class="py-4 px-4 text-emerald-800 text-xs font-semibold" colspan="2">Suma automática Pacientes</td>
+          </tr>
+          <tr class="bg-emerald-100/80 border-t border-emerald-200 font-bold">
+            <td class="py-4 px-4 text-emerald-950 font-extrabold uppercase text-xs" colspan="2">TOTAL GENERAL ELABORACIONES</td>
+            <td colspan="1"></td>
+            <td class="py-4 px-4 text-center">
+              <span id="totalElaboraciones" class="text-2xl text-emerald-800 font-black">159</span>
+            </td>
+            <td colspan="1"></td>
+            <td class="py-4 px-4 text-emerald-900 text-xs font-semibold" colspan="2">Suma automática Elaboraciones</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FOOTER ACTIONS & GUIDE -->
+    <div class="bg-slate-50 p-6 border-t border-slate-200">
+      
+      <div class="flex flex-col sm:flex-row gap-4 mb-6">
+        <button onclick="copyData()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-lg shadow transition flex items-center justify-center gap-2">
+          <i class="fa-regular fa-copy"></i>
+          <span>Copiar Resumen para Reporte</span>
+        </button>
+        <button onclick="resetAll()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-6 rounded-lg shadow transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-rotate-left"></i>
+          <span>Reiniciar Turno (Poner a 0)</span>
+        </button>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg border border-slate-200 text-slate-600 text-xs space-y-1.5">
+        <div class="font-bold text-slate-800 text-sm mb-1 flex items-center gap-2">
+          <i class="fa-solid fa-circle-info text-blue-500"></i> GUÍA RÁPIDA DE USO:
+        </div>
+        <p>• Seleccionar la fecha del turno con el <b>selector de fecha</b> del encabezado.</p>
+        <p>• Pulsar en <b>+</b> o <b>-</b> para incrementar o decrementar el recuento de cada área.</p>
+        <p>• También se puede escribir el número exacto directamente en la casilla de la columna <b>VALOR ACTUAL</b>.</p>
+        <p>• Los datos se guardan <b>automáticamente</b> en el navegador (localStorage). Al volver a abrir la página se restauran.</p>
+        <p>• Pulsar en <b>Copiar Resumen</b> para copiar un texto formateado al portapapeles.</p>
+        <p>• Pulsar en <b>Exportar Excel</b> para descargar un archivo <b>.xlsx</b> con todos los datos del turno.</p>
+        <p>• Al finalizar el turno, pulsar en <b>Reiniciar Turno</b> para poner a cero todas las métricas y limpiar el almacenamiento.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    const idsP = ['salaP', 'hdmP', 'otrosP', 'hdoP'];
+    const idsE = ['salaE', 'hdmE', 'otrosE', 'hdoE'];
+    const allIds = [...idsP, ...idsE];
+
+    function formatDate(iso) {
+      const [y, m, d] = iso.split('-');
+      return `${d}/${m}/${y}`;
+    }
+
+    function saveToLocalStorage() {
+      const data = {};
+      allIds.forEach(id => { data[id] = document.getElementById(id).value; });
+      data.fechaTurno = document.getElementById('fechaTurno').value;
+      localStorage.setItem('controlDiario', JSON.stringify(data));
+    }
+
+    function loadFromLocalStorage() {
+      const raw = localStorage.getItem('controlDiario');
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        allIds.forEach(id => {
+          if (data[id] !== undefined) document.getElementById(id).value = data[id];
+        });
+        if (data.fechaTurno) document.getElementById('fechaTurno').value = data.fechaTurno;
+      } catch (e) {}
+    }
+
+    function changeVal(id, delta) {
+      const input = document.getElementById(id);
+      let val = parseInt(input.value) || 0;
+      val += delta;
+      if (val < 0) val = 0;
+      input.value = val;
+      updateTotals();
+      saveToLocalStorage();
+    }
+
+    function updateTotals() {
+      let totalP = idsP.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
+      let totalE = idsE.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
+
+      document.getElementById('totalPacientes').innerText = totalP;
+      document.getElementById('totalElaboraciones').innerText = totalE;
+    }
+
+    function resetAll() {
+      if (confirm('¿Estás seguro de que deseas reiniciar todos los contadores a 0 para el nuevo turno?')) {
+        allIds.forEach(id => { document.getElementById(id).value = 0; });
+        localStorage.removeItem('controlDiario');
+        updateTotals();
+      }
+    }
+
+    function copyData() {
+      const fecha = formatDate(document.getElementById('fechaTurno').value);
+      const text = `CONTROL DIARIO DE PACIENTES Y ELABORACIONES (${fecha})
+--------------------------------------------------
+SALA: Pacientes=${document.getElementById('salaP').value} | Elaboraciones=${document.getElementById('salaE').value}
+HDM:  Pacientes=${document.getElementById('hdmP').value} | Elaboraciones=${document.getElementById('hdmE').value}
+OTROS: Pacientes=${document.getElementById('otrosP').value} | Elaboraciones=${document.getElementById('otrosE').value}
+HDO:   Pacientes=${document.getElementById('hdoP').value} | Elaboraciones=${document.getElementById('hdoE').value}
+--------------------------------------------------
+TOTAL PACIENTES: ${document.getElementById('totalPacientes').innerText}
+TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert('¡Resumen del turno copiado al portapapeles!');
+      });
+    }
+
+    function exportToExcel() {
+      const fecha = document.getElementById('fechaTurno').value;
+      const fechaLegible = formatDate(fecha);
+      const wb = XLSX.utils.book_new();
+
+      const rows = [
+        ['CONTROL DIARIO DE PACIENTES Y ELABORACIONES'],
+        ['Fecha', fechaLegible],
+        [],
+        ['Servicio', 'Métrica', 'Valor'],
+        ['Sala', 'Pacientes (P)', parseInt(document.getElementById('salaP').value) || 0],
+        ['Sala', 'Elaboraciones (E)', parseInt(document.getElementById('salaE').value) || 0],
+        ['H.D.M.', 'Pacientes (P)', parseInt(document.getElementById('hdmP').value) || 0],
+        ['H.D.M.', 'Elaboraciones (E)', parseInt(document.getElementById('hdmE').value) || 0],
+        ['Otros', 'Pacientes (P)', parseInt(document.getElementById('otrosP').value) || 0],
+        ['Otros', 'Elaboraciones (E)', parseInt(document.getElementById('otrosE').value) || 0],
+        ['H.D.O.', 'Pacientes (P)', parseInt(document.getElementById('hdoP').value) || 0],
+        ['H.D.O.', 'Elaboraciones (E)', parseInt(document.getElementById('hdoE').value) || 0],
+        [],
+        ['TOTAL PACIENTES', parseInt(document.getElementById('totalPacientes').innerText) || 0],
+        ['TOTAL ELABORACIONES', parseInt(document.getElementById('totalElaboraciones').innerText) || 0]
+      ];
+
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+      ws['!cols'] = [{ wch: 20 }, { wch: 22 }, { wch: 10 }];
+      XLSX.utils.book_append_sheet(wb, ws, 'Control Diario');
+      XLSX.writeFile(wb, `control_diario_${fecha}.xlsx`);
+    }
+
+    allIds.forEach(id => {
+      document.getElementById(id).addEventListener('change', saveToLocalStorage);
+    });
+    document.getElementById('fechaTurno').addEventListener('change', saveToLocalStorage);
+
+    loadFromLocalStorage();
+    updateTotals();
+  </script>
+</body>
+</html>
