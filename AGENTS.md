@@ -4,7 +4,7 @@ Instrucciones para agentes de IA que trabajan en este proyecto.
 
 ## Estructura del proyecto
 
-- `control_diario.html` — Archivo único con HTML + CSS (Tailwind CDN) + JavaScript vanilla
+- `index.html` — Archivo único con HTML + CSS (Tailwind CDN) + JavaScript vanilla
 - `.github/workflows/deploy.yml` — GitHub Actions para despliegue automático a GitHub Pages
 - `README.md` — Documentación del proyecto
 
@@ -19,7 +19,7 @@ Instrucciones para agentes de IA que trabajan en este proyecto.
 
 ## Convenciones
 
-- Todo el código va en `control_diario.html` (no hay bundler ni build step)
+- Todo el código va en `index.html` (no hay bundler ni build step)
 - Usar clases de Tailwind para estilos (no agregar CSS custom salvo sea estrictamente necesario)
 - Los IDs de inputs usan camelCase: `salaP`, `salaE`, `hdmP`, `hdmE`, `otrosP`, `otrosE`, `hdoP`, `hdoE`
 - Las funciones JS van en un solo bloque `<script>` al final del body
@@ -50,7 +50,7 @@ Instrucciones para agentes de IA que trabajan en este proyecto.
 
 ```bash
 # Abrir localmente
-open control_diario.html
+open index.html
 
 # Ver estado de GitHub Pages
 gh api repos/{owner}/{repo}/pages
