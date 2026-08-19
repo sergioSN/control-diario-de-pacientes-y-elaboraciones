@@ -2,7 +2,7 @@
 
 Aplicación web de gestión y recuento diario para servicios hospitalarios. Aplicación web de gestión y recuento diario para servicios hospitalarios.
 
-**GitHub Pages:** [https://sergiosn.github.io/CONTROL-DIARIO-DE-PACIENTES-Y-ELABORACIONES/](https://sergiosn.github.io/CONTROL-DIARIO-DE-PACIENTES-Y-ELABORACIONES/)
+**GitHub Pages:** [https://sergiosn.github.io/control-diario-de-pacientes-y-elaboraciones/](https://sergiosn.github.io/control-diario-de-pacientes-y-elaboraciones/)
 
 ## Funcionalidades
 
