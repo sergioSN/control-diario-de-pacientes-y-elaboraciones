@@ -29,7 +29,7 @@
 <body class="bg-slate-100 min-h-screen p-2 md:p-8 text-slate-800">
 
   <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200">
-    
+
     <!-- HEADER -->
     <div class="bg-slate-900 text-white p-6 border-b border-slate-800">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <!-- MAIN TABLE CONTAINER -->
+    <!-- MAIN TABLE: SERVICIOS -->
     <div class="overflow-x-auto">
       <table class="w-full text-left border-collapse">
         <thead>
@@ -57,230 +57,228 @@
             <th class="py-3.5 px-2 md:px-4 text-center w-12 md:w-28">-</th>
             <th class="py-3.5 px-2 md:px-4 text-center w-16 md:w-32">Valor</th>
             <th class="py-3.5 px-2 md:px-4 text-center w-12 md:w-28">+</th>
-            <th class="py-3.5 px-4 hidden md:table-cell">Notas / Desglose</th>
-            <th class="py-3.5 px-4 text-right hidden md:table-cell w-28">Previsión</th>
+            <th class="py-3.5 px-4 hidden md:table-cell">Notas</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-200 text-sm">
 
           <!-- SALA -->
           <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
-            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">SALA</td>
+            <td colspan="6" class="py-2.5 px-4 text-xs uppercase tracking-wider">SALA</td>
           </tr>
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-4 font-medium text-slate-700">Sala</td>
             <td class="py-3 px-4 font-semibold text-slate-900">Pacientes (P)</td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('salaP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                -
-              </button>
+              <button onclick="changeVal('salaP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">-</button>
             </td>
             <td class="py-3 px-4 text-center">
               <input type="number" id="salaP" value="3" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
             </td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('salaP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                +
-              </button>
+              <button onclick="changeVal('salaP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">+</button>
             </td>
-            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Recuento directo en sala</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-400 hidden md:table-cell">-</td>
+            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Recuento directo</td>
           </tr>
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-4 font-medium text-slate-700">Sala</td>
             <td class="py-3 px-4 font-semibold text-slate-900">Elaboraciones (E)</td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('salaE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                -
-              </button>
+              <button onclick="changeVal('salaE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">-</button>
             </td>
             <td class="py-3 px-4 text-center">
               <input type="number" id="salaE" value="7" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
             </td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('salaE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                +
-              </button>
+              <button onclick="changeVal('salaE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">+</button>
             </td>
-            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Recuento directo en sala</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-400 hidden md:table-cell">-</td>
+            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Recuento directo</td>
           </tr>
 
           <!-- HDM -->
           <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
-            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">HOSPITAL DE DÍA MÉDICO (HDM)</td>
+            <td colspan="6" class="py-2.5 px-4 text-xs uppercase tracking-wider">HOSPITAL DE DÍA MÉDICO (HDM)</td>
           </tr>
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-4 font-medium text-slate-700">H.D.M.</td>
             <td class="py-3 px-4 font-semibold text-slate-900">Pacientes (P)</td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('hdmP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                -
-              </button>
+              <button onclick="changeVal('hdmP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">-</button>
             </td>
             <td class="py-3 px-4 text-center">
               <input type="number" id="hdmP" value="1" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
             </td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('hdmP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                +
-              </button>
+              <button onclick="changeVal('hdmP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">+</button>
             </td>
             <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Contador individual</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-400 hidden md:table-cell">-</td>
           </tr>
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-4 font-medium text-slate-700">H.D.M.</td>
             <td class="py-3 px-4 font-semibold text-slate-900">Elaboraciones (E)</td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('hdmE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                -
-              </button>
+              <button onclick="changeVal('hdmE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">-</button>
             </td>
             <td class="py-3 px-4 text-center">
               <input type="number" id="hdmE" value="1" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
             </td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('hdmE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                +
-              </button>
+              <button onclick="changeVal('hdmE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">+</button>
             </td>
             <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Contador individual</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-400 hidden md:table-cell">-</td>
           </tr>
 
           <!-- OTROS -->
           <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
-            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">OTROS</td>
+            <td colspan="6" class="py-2.5 px-4 text-xs uppercase tracking-wider">OTROS</td>
           </tr>
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-4 font-medium text-slate-700">Otros</td>
             <td class="py-3 px-4 font-semibold text-slate-900">Pacientes (P)</td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('otrosP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                -
-              </button>
+              <button onclick="changeVal('otrosP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">-</button>
             </td>
             <td class="py-3 px-4 text-center">
               <input type="number" id="otrosP" value="4" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
             </td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('otrosP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                +
-              </button>
+              <button onclick="changeVal('otrosP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">+</button>
             </td>
-            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Recuento externo / otros servicios</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-400 hidden md:table-cell">-</td>
+            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Recuento externo</td>
           </tr>
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-4 font-medium text-slate-700">Otros</td>
             <td class="py-3 px-4 font-semibold text-slate-900">Elaboraciones (E)</td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('otrosE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                -
-              </button>
+              <button onclick="changeVal('otrosE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">-</button>
             </td>
             <td class="py-3 px-4 text-center">
               <input type="number" id="otrosE" value="4" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
             </td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('otrosE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                +
-              </button>
+              <button onclick="changeVal('otrosE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">+</button>
             </td>
-            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Recuento externo / otros servicios</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-400 hidden md:table-cell">-</td>
+            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Recuento externo</td>
           </tr>
 
           <!-- HDO -->
           <tr class="bg-indigo-50/70 font-semibold text-indigo-900">
-            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">HOSPITAL DE DÍA ONCOLÓGICO (HDO)</td>
+            <td colspan="6" class="py-2.5 px-4 text-xs uppercase tracking-wider">HOSPITAL DE DÍA ONCOLÓGICO (HDO)</td>
           </tr>
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-4 font-medium text-slate-700">H.D.O.</td>
             <td class="py-3 px-4 font-semibold text-slate-900">Pacientes (P)</td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('hdoP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                -
-              </button>
+              <button onclick="changeVal('hdoP', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">-</button>
             </td>
             <td class="py-3 px-4 text-center">
               <input type="number" id="hdoP" value="94" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
             </td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('hdoP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                +
-              </button>
+              <button onclick="changeVal('hdoP', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">+</button>
             </td>
-            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Marcas en hoja de registro</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-400 hidden md:table-cell">-</td>
+            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Hoja de registro</td>
           </tr>
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-4 font-medium text-slate-700">H.D.O.</td>
             <td class="py-3 px-4 font-semibold text-slate-900">Elaboraciones (E)</td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('hdoE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                -
-              </button>
+              <button onclick="changeVal('hdoE', -1)" class="w-10 h-10 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">-</button>
             </td>
             <td class="py-3 px-4 text-center">
               <input type="number" id="hdoE" value="147" onchange="updateTotals()" class="w-20 text-center font-bold text-xl text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
             </td>
             <td class="py-3 px-4 text-center">
-              <button onclick="changeVal('hdoE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">
-                +
-              </button>
+              <button onclick="changeVal('hdoE', 1)" class="w-10 h-10 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md shadow-sm transition active:scale-95 flex items-center justify-center mx-auto">+</button>
             </td>
-            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Marcas en hoja de registro</td>
-            <td class="py-3 px-4 text-right font-medium text-slate-400 hidden md:table-cell">-</td>
+            <td class="py-3 px-4 text-slate-500 text-xs hidden md:table-cell">Hoja de registro</td>
           </tr>
 
-          <!-- PREVISIÓN Y COLIRIOS -->
-          <tr class="bg-indigo-50/70 font-semibold text-indigo-900 hidden md:table-row">
-            <td colspan="7" class="py-2.5 px-4 text-xs uppercase tracking-wider">PREVISIÓN Y COLIRIOS</td>
-          </tr>
-          <tr class="hover:bg-slate-50 transition hidden md:table-row">
-            <td class="py-3 px-4 font-medium text-slate-700">Colirios Especiales</td>
-            <td class="py-3 px-4 text-xs text-slate-600">Insulina (10), Cefta (4), Tobra (2)</td>
-            <td colspan="3"></td>
-            <td class="py-3 px-4 text-slate-500 text-xs">Desglose activo</td>
-            <td class="py-3 px-4 text-right font-bold text-slate-800">16</td>
-          </tr>
-          <tr class="hover:bg-slate-50 transition hidden md:table-row">
-            <td class="py-3 px-4 font-medium text-slate-700">Previsión Global</td>
-            <td class="py-3 px-4 text-xs text-slate-600">Suma total estimada</td>
-            <td colspan="3"></td>
-            <td class="py-3 px-4 text-slate-500 text-xs">Fórmula: 5+20+2+16+5+6</td>
-            <td class="py-3 px-4 text-right font-bold text-slate-800">54</td>
-          </tr>
-
-          <!-- TOTALES GENERALES -->
+          <!-- TOTALES SERVICIOS -->
           <tr class="bg-emerald-50/80 border-t-2 border-emerald-500 font-bold">
             <td class="py-4 px-4 text-emerald-950 font-extrabold uppercase text-xs" colspan="2">TOTAL PACIENTES</td>
-            <td colspan="1"></td>
+            <td></td>
             <td class="py-4 px-4 text-center">
-              <span id="totalPacientes" class="text-2xl text-emerald-700 font-black">102</span>
+              <span id="totalPacientes" class="text-2xl text-emerald-700 font-black">0</span>
             </td>
-            <td colspan="1"></td>
-            <td class="py-4 px-4 text-emerald-800 text-xs font-semibold hidden md:table-cell" colspan="2">Suma automática</td>
+            <td></td>
+            <td class="py-4 px-4 text-emerald-800 text-xs font-semibold hidden md:table-cell">Suma automática</td>
           </tr>
           <tr class="bg-emerald-100/80 border-t border-emerald-200 font-bold">
             <td class="py-4 px-4 text-emerald-950 font-extrabold uppercase text-xs" colspan="2">TOTAL ELABORACIONES</td>
-            <td colspan="1"></td>
+            <td></td>
             <td class="py-4 px-4 text-center">
-              <span id="totalElaboraciones" class="text-2xl text-emerald-800 font-black">159</span>
+              <span id="totalElaboraciones" class="text-2xl text-emerald-800 font-black">0</span>
             </td>
-            <td colspan="1"></td>
-            <td class="py-4 px-4 text-emerald-900 text-xs font-semibold hidden md:table-cell" colspan="2">Suma automática</td>
+            <td></td>
+            <td class="py-4 px-4 text-emerald-900 text-xs font-semibold hidden md:table-cell">Suma automática</td>
           </tr>
 
         </tbody>
       </table>
     </div>
 
+    <!-- COLIRIOS ESPECIALES -->
+    <div class="border-t border-slate-200">
+      <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2">
+          <i class="fa-solid fa-droplet text-blue-400"></i> Colirios Especiales
+        </span>
+      </div>
+      <div class="p-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
+          <span class="font-semibold text-sm text-slate-700">Insulina</span>
+          <div class="flex items-center gap-2">
+            <button onclick="changeVal('colInsulina', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+            <input type="number" id="colInsulina" value="10" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            <button onclick="changeVal('colInsulina', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
+          <span class="font-semibold text-sm text-slate-700">Ceftazidima (Cefta)</span>
+          <div class="flex items-center gap-2">
+            <button onclick="changeVal('colCefta', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+            <input type="number" id="colCefta" value="4" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            <button onclick="changeVal('colCefta', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between bg-white border border-slate-200 rounded-lg px-4 py-3">
+          <span class="font-semibold text-sm text-slate-700">Tobramicina (Tobra)</span>
+          <div class="flex items-center gap-2">
+            <button onclick="changeVal('colTobra', -1)" class="w-9 h-9 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">-</button>
+            <input type="number" id="colTobra" value="2" onchange="updateColirios()" class="w-14 text-center font-bold text-lg text-blue-900 bg-slate-50 border border-slate-300 rounded-md py-1 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none">
+            <button onclick="changeVal('colTobra', 1)" class="w-9 h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold rounded-md transition active:scale-95 flex items-center justify-center">+</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="bg-blue-50 border-t border-blue-200 px-4 py-2.5 flex items-center justify-between">
+        <span class="text-xs font-bold text-blue-700 uppercase">Total Colirios</span>
+        <span id="totalColirios" class="text-xl font-black text-blue-800">16</span>
+      </div>
+    </div>
+
+    <!-- PREVISIÓN GLOBAL -->
+    <div class="border-t border-slate-200">
+      <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2">
+          <i class="fa-solid fa-chart-line text-violet-400"></i> Previsión Global
+        </span>
+      </div>
+      <div class="p-4">
+        <div class="bg-white border border-slate-200 rounded-lg p-4">
+          <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Previsión total del día</label>
+          <input type="number" id="previsionGlobal" value="54" onchange="saveToLocalStorage()" class="w-full text-center font-bold text-2xl text-violet-800 bg-violet-50 border border-violet-300 rounded-md py-2 focus:ring-2 focus:ring-violet-500 focus:bg-white outline-none">
+        </div>
+      </div>
+    </div>
+
     <!-- FOOTER ACTIONS & GUIDE -->
     <div class="bg-slate-50 p-6 border-t border-slate-200">
-      
+
       <div class="flex flex-col sm:flex-row gap-4 mb-6">
         <button onclick="copyData()" class="flex-1 bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-lg shadow transition flex items-center justify-center gap-2">
           <i class="fa-regular fa-copy"></i>
@@ -302,7 +300,7 @@
         </div>
         <p>• Seleccionar la fecha del turno con el <b>selector de fecha</b> del encabezado.</p>
         <p>• Pulsar en <b>+</b> o <b>-</b> para incrementar o decrementar el recuento de cada área.</p>
-        <p>• También se puede escribir el número exacto directamente en la casilla de la columna <b>VALOR ACTUAL</b>.</p>
+        <p>• También se puede escribir el número exacto directamente en la casilla de la columna <b>VALOR</b>.</p>
         <p>• Pulsar en <b>Copiar Resumen</b> para copiar un texto formateado al portapapeles.</p>
         <p>• Pulsar en <b>Exportar Excel</b> para descargar un archivo <b>.xlsx</b> con todos los datos del turno.</p>
         <p>• Al finalizar el turno, pulsar en <b>Reiniciar Turno</b> para poner a cero todas las métricas.</p>
@@ -326,7 +324,8 @@
   <script>
     const idsP = ['salaP', 'hdmP', 'otrosP', 'hdoP'];
     const idsE = ['salaE', 'hdmE', 'otrosE', 'hdoE'];
-    const allIds = [...idsP, ...idsE];
+    const idsCol = ['colInsulina', 'colCefta', 'colTobra'];
+    const allIds = [...idsP, ...idsE, ...idsCol, 'previsionGlobal'];
 
     function formatDate(iso) {
       const [y, m, d] = iso.split('-');
@@ -358,16 +357,22 @@
       val += delta;
       if (val < 0) val = 0;
       input.value = val;
-      updateTotals();
+      if (idsCol.includes(id)) updateColirios();
+      else updateTotals();
       saveToLocalStorage();
     }
 
     function updateTotals() {
       let totalP = idsP.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
       let totalE = idsE.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
-
       document.getElementById('totalPacientes').innerText = totalP;
       document.getElementById('totalElaboraciones').innerText = totalE;
+    }
+
+    function updateColirios() {
+      let total = idsCol.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
+      document.getElementById('totalColirios').innerText = total;
+      saveToLocalStorage();
     }
 
     function resetAll() {
@@ -375,20 +380,26 @@
         allIds.forEach(id => { document.getElementById(id).value = 0; });
         localStorage.removeItem('controlDiario');
         updateTotals();
+        updateColirios();
       }
     }
 
     function copyData() {
       const fecha = formatDate(document.getElementById('fechaTurno').value);
+      const totalCol = idsCol.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
       const text = `CONTROL DIARIO DE PACIENTES Y ELABORACIONES (${fecha})
 --------------------------------------------------
-SALA: Pacientes=${document.getElementById('salaP').value} | Elaboraciones=${document.getElementById('salaE').value}
-HDM:  Pacientes=${document.getElementById('hdmP').value} | Elaboraciones=${document.getElementById('hdmE').value}
-OTROS: Pacientes=${document.getElementById('otrosP').value} | Elaboraciones=${document.getElementById('otrosE').value}
-HDO:   Pacientes=${document.getElementById('hdoP').value} | Elaboraciones=${document.getElementById('hdoE').value}
+SALA:    Pacientes=${document.getElementById('salaP').value} | Elaboraciones=${document.getElementById('salaE').value}
+HDM:     Pacientes=${document.getElementById('hdmP').value} | Elaboraciones=${document.getElementById('hdmE').value}
+OTROS:   Pacientes=${document.getElementById('otrosP').value} | Elaboraciones=${document.getElementById('otrosE').value}
+HDO:     Pacientes=${document.getElementById('hdoP').value} | Elaboraciones=${document.getElementById('hdoE').value}
 --------------------------------------------------
 TOTAL PACIENTES: ${document.getElementById('totalPacientes').innerText}
-TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`;
+TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}
+--------------------------------------------------
+COLIRIOS: Insulina=${document.getElementById('colInsulina').value} | Cefta=${document.getElementById('colCefta').value} | Tobra=${document.getElementById('colTobra').value}
+TOTAL COLIRIOS: ${totalCol}
+PREVISIÓN GLOBAL: ${document.getElementById('previsionGlobal').value}`;
 
       navigator.clipboard.writeText(text).then(() => {
         alert('¡Resumen del turno copiado al portapapeles!');
@@ -404,6 +415,7 @@ TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`
         ['CONTROL DIARIO DE PACIENTES Y ELABORACIONES'],
         ['Fecha', fechaLegible],
         [],
+        ['--- SERVICIOS ---', '', ''],
         ['Servicio', 'Métrica', 'Valor'],
         ['Sala', 'Pacientes (P)', parseInt(document.getElementById('salaP').value) || 0],
         ['Sala', 'Elaboraciones (E)', parseInt(document.getElementById('salaE').value) || 0],
@@ -415,11 +427,21 @@ TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`
         ['H.D.O.', 'Elaboraciones (E)', parseInt(document.getElementById('hdoE').value) || 0],
         [],
         ['TOTAL PACIENTES', parseInt(document.getElementById('totalPacientes').innerText) || 0],
-        ['TOTAL ELABORACIONES', parseInt(document.getElementById('totalElaboraciones').innerText) || 0]
+        ['TOTAL ELABORACIONES', parseInt(document.getElementById('totalElaboraciones').innerText) || 0],
+        [],
+        ['--- COLIRIOS ESPECIALES ---', '', ''],
+        ['Colirio', 'Unidades'],
+        ['Insulina', parseInt(document.getElementById('colInsulina').value) || 0],
+        ['Ceftazidima (Cefta)', parseInt(document.getElementById('colCefta').value) || 0],
+        ['Tobramicina (Tobra)', parseInt(document.getElementById('colTobra').value) || 0],
+        ['TOTAL COLIRIOS', idsCol.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0)],
+        [],
+        ['--- PREVISIÓN ---', '', ''],
+        ['Previsión Global', parseInt(document.getElementById('previsionGlobal').value) || 0]
       ];
 
       const ws = XLSX.utils.aoa_to_sheet(rows);
-      ws['!cols'] = [{ wch: 20 }, { wch: 22 }, { wch: 10 }];
+      ws['!cols'] = [{ wch: 25 }, { wch: 22 }, { wch: 10 }];
       XLSX.utils.book_append_sheet(wb, ws, 'Control Diario');
       XLSX.writeFile(wb, `control_diario_${fecha}.xlsx`);
     }
@@ -431,6 +453,7 @@ TOTAL ELABORACIONES: ${document.getElementById('totalElaboraciones').innerText}`
 
     loadFromLocalStorage();
     updateTotals();
+    updateColirios();
   </script>
 </body>
 </html>
